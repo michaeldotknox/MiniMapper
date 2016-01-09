@@ -97,3 +97,8 @@ var destination = Mapper.Map<SourceClass, DestinationClass>(source);
 ```
 
 In this case, MiniMapper will create the DestinationClass object for you.
+
+## Getting MiniMapper
+MiniMapper is available on NuGet as two packages:
+* MiniMapper.Attributes - This contains just the attributes and should be used in the project containing the classes you want to map from
+* MiniMapper.Core - This contains everything that you need to map and references MiniMapper.Attributes
