@@ -5,7 +5,7 @@ namespace MiniMapper.Attributes
     /// <summary>
     /// Flags an attribute as mapping to a property on another class
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class MapsToAttribute : Attribute
     {
         /// <summary>
