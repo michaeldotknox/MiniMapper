@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MiniMapper.Core</id>
+    <version>$version$</version>
+    <title>MiniMapper.Core</title>
+    <authors>Michael Knox</authors>
+    <owners>Michael Knox</owners>
+    <projectUrl>https://github.com/michaeldotknox/minimapper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A small framework for mapping the properties from one object to another</description>
+    <summary>A small framework for mapping the properties from one object to another</summary>
+    <releaseNotes>The is the first release</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>c# .Net Mapping</tags>
+  </metadata>
+</package>
