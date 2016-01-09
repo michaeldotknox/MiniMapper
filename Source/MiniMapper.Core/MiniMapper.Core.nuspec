@@ -8,8 +8,8 @@
     <owners>Michael Knox</owners>
     <projectUrl>https://github.com/michaeldotknox/minimapper</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A small framework for mapping the properties from one object to another</description>
-    <summary>A small framework for mapping the properties from one object to another</summary>
+    <description>MiniMapper is small framework for mapping the properties from one object to another.  MiniMapper.Core contains the components to create the maps and to map one object to another.</description>
+    <summary>MiniMapper is small framework for mapping the properties from one object to another.  MiniMapper.Core contains the components to create the maps and to map one object to another.</summary>
     <releaseNotes>The is the first release</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>c# .Net Mapping</tags>
