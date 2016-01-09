@@ -19,4 +19,81 @@ or type casting.  I don't want to type all of that.
 
 MiniMapper makes it easy to map the properties of an object to the properties of another object without all of the typing.  Simply add some attributes to the properties on a class, create the map 
 in MiniMapper during initialization, and then map the two objects.
-  
+
+## Examples
+
+### Adding attributes to the properties of a class
+You can map the properties of one object to the properties of any object by simply adding an attribute and specifying the name of the destination property:
+```
+public class SourceClass
+{
+    [MapsTo("DestinationProperty")]
+    public string SourceProperty { get; set; }
+}
+
+public class DestinationClass
+{
+    public string DestinationProperty { get; set; }
+}
+```
+
+You can also specify that a property maps to another property depending on the type.  For instance:
+
+```
+public class SourceClass
+{
+    [MapsTo("DestinationProperty1", DestinationType = typeof(DestinationClass1)]
+    [MapsTo("DestinationProperty2", DestinationType = typeof(DestinationClass2)]
+    public string SourceProperty { get; set; }
+}
+
+public class DestinationClass1
+{
+    public string DestinationProperty1 { get; set; }
+}
+
+public class DestinationClass2
+{
+    public string DestinationProperty2 { get; set; }
+}
+```
+
+### Creating the maps
+After you've added the attributes to your classes, you just need to create the maps during initialization.
+
+```
+using MiniMapper.Core;
+
+namespace MiniMapper.Example
+{
+    class program
+    {
+        static void Main(string[] args)
+        {
+            Mapper.CreateMap<SourceClass, DestinationClass>();
+        }
+    }
+}
+```
+
+### Mapping one object to another
+When you need to map one object to another, you simply do this:
+
+```
+var source = new SourceClass { SourceProperty = "Value" };
+var destination = new DestinationClass();
+
+destination = Mapper.Map<SourceClass, DestinationClass>(source, destination); 
+```
+
+`destination` will have the `DestinationProperty` set to "Value"
+
+If you don't have any initialization to do for `DestinationClass`, you can use this simplified syntax:
+
+```
+var source = new SourceClass { SourceProperty = "Value" };
+
+var destination = Mapper.Map<SourceClass, DestinationClass>(source); 
+```
+
+In this case, MiniMapper will create the DestinationClass object for you.
