@@ -38,7 +38,7 @@ namespace MiniMapper.Core
                     var sourceParameter = Expression.Parameter(typeof (TSource));
                     var destinationParameter = Expression.Parameter(typeof (TDestination));
                     var body = Expression.Convert(Expression.Assign(
-                        Expression.PropertyOrField(destinationParameter, attribute.DestinationName),
+                        Expression.PropertyOrField(destinationParameter, attribute.DestinationName ?? property.Name),
                         Expression.PropertyOrField(sourceParameter, property.Name)), typeof(object));
                     var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
                     var conversionDelegate = (Func<TSource, TDestination, object>) expression.Compile();
