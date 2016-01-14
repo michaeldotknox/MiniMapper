@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using MiniMapper.Attributes;
+using MiniMapper.Core.Interrogation;
 
 namespace MiniMapper.Core
 {
@@ -26,7 +27,7 @@ namespace MiniMapper.Core
         /// <typeparam name="TDestination">The type of the destination object</typeparam>
         public static void CreateMap<TSource, TDestination>()
         {
-            var conversions = new List<object>();
+            var conversions = new List<Conversion>();
             foreach (
                 var property in
                     (typeof (TSource).GetProperties().Where(x => x.GetCustomAttribute(typeof (MapsToAttribute)) != null))
@@ -43,7 +44,12 @@ namespace MiniMapper.Core
                     var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
                     var conversionDelegate = (Func<TSource, TDestination, object>) expression.Compile();
 
-                conversions.Add(conversionDelegate);
+                    conversions.Add(new Conversion
+                    {
+                        SourceProperty = property.Name,
+                        DestinationProperty = attribute.DestinationName ?? property.Name,
+                        Expression = conversionDelegate
+                    });
                 }
             }
             Maps.Add(new Map
@@ -74,9 +80,9 @@ namespace MiniMapper.Core
             var conversions = 
                 map.Conversions;
 
-            foreach (var conversionDelegate in conversions)
+            foreach (var conversion in conversions)
             {
-                ((Func<TSource, TDestination, object>)conversionDelegate)
+                ((Func<TSource, TDestination, object>)conversion.Expression)
                 (source, destination);
             }
 
@@ -93,6 +99,40 @@ namespace MiniMapper.Core
         public static TDestination Map<TSource, TDestination>(TSource source) where TDestination : class, new()
         {
             return Map(source, new TDestination());
+        }
+
+        /// <summary>
+        /// Returns a list of mapped objects and their properties
+        /// </summary>
+        /// <returns>A list of mapped objects</returns>
+        public static IEnumerable<MappedObject> GetMappings()
+        {
+            var result = new List<MappedObject>();
+
+            foreach (var map in Maps)
+            {
+                var mappedObject = new MappedObject
+                {
+                    SourceObjectType = map.SourceType.ToString(),
+                    DestinationObjectType = map.DestinationType.ToString(),
+                };
+
+                var properties = new List<MappedProperty>();
+
+                foreach (var conversion in map.Conversions)
+                {
+                    properties.Add(new MappedProperty
+                    {
+                        SourceProperty = conversion.SourceProperty,
+                        DestinationProperty = conversion.DestinationProperty
+                    });
+                    mappedObject.Properties = properties;
+                }
+
+                result.Add(mappedObject);
+            }
+
+            return result;
         }
     }
 }

@@ -35,6 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\MapNotFoundException.cs" />
+    <Compile Include="Interrogation\Conversion.cs" />
+    <Compile Include="Interrogation\MappedObject.cs" />
+    <Compile Include="Interrogation\MappedProperty.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

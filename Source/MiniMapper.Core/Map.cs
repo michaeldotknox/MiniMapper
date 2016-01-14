@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MiniMapper.Core.Interrogation;
 
 namespace MiniMapper.Core
 {
@@ -7,6 +8,6 @@ namespace MiniMapper.Core
     {
         internal Type SourceType { get; set; }
         internal Type DestinationType { get; set; }
-        internal IEnumerable<object> Conversions { get; set; }
+        internal IEnumerable<Conversion> Conversions { get; set; }
     }
 }
