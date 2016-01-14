@@ -55,10 +55,25 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateMapTests.cs" />
+    <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClasses\DestinationObject.cs" />
+    <Compile Include="TestClasses\SourceObject.cs" />
+    <Compile Include="TestClasses\UnmappedDestinationObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiniMapper.Attributes\MiniMapper.Attributes.csproj">
+      <Project>{43E0A64B-66B2-436C-A533-63ABF4F9E274}</Project>
+      <Name>MiniMapper.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniMapper.Core\MiniMapper.Core.csproj">
+      <Project>{7A936498-BD01-46EA-A855-D1611BDF034D}</Project>
+      <Name>MiniMapper.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
