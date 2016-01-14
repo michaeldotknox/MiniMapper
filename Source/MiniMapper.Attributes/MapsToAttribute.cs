@@ -22,11 +22,9 @@ namespace MiniMapper.Attributes
         /// Initializes the attribute on the property
         /// </summary>
         /// <param name="destinationName">The name of the property on the destination class</param>
-        /// <param name="destinationType">An optional parameter indicating the destination type for mapping</param>
-        public MapsToAttribute(string destinationName = null, Type destinationType = null)
+        public MapsToAttribute(string destinationName = null)
         {
             DestinationName = destinationName;
-            DestinationType = destinationType;
         }
     }
 }
