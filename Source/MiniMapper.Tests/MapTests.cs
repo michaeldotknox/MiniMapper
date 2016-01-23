@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using MiniMapper.Core;
 using MiniMapper.Core.Exceptions;
@@ -106,6 +107,26 @@ namespace MiniMapper.Tests
 
             // Assert
             destination.UnmappedProperty.Should().NotBe(source.SingleMappedProperty);
+        }
+
+        [Test]
+        public void ListOfSourceObjectsMapsToListOfDestinationObjects()
+        {
+            // Arrange
+            var sources = _fixture.CreateMany<SourceObject>().ToList();
+            Mapper.ClearMappings();
+            Mapper.CreateMap<SourceObject, DestinationObject>();
+
+            // Act
+            var results = Mapper.Map<SourceObject, DestinationObject>(sources).ToList();
+
+            // Assert
+            results.Should().HaveSameCount(sources);
+            for (var i = 0; i < sources.Count; i++)
+            {
+                sources[i].SourceProperty.Should().Be(results[i].DestinationProperty);
+                sources[i].SameProperty.Should().Be(results[i].SameProperty);
+            }
         }
     }
 }

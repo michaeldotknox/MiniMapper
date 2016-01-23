@@ -112,6 +112,18 @@ namespace MiniMapper.Core
             return destination;
         }
 
+        public static IEnumerable<TDestination> Map<TSource, TDestination>(IEnumerable<TSource> source)
+            where TDestination : class, new()
+        {
+            var list = new List<TDestination>();
+            foreach (var sourceObject in source)
+            {
+                list.Add(Map<TSource, TDestination>(sourceObject));
+            }
+
+            return list;
+        } 
+
         /// <summary>
         /// Maps the properties from a source object to the properties on a destination object
         /// </summary>
