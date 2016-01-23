@@ -59,7 +59,7 @@ namespace MiniMapper.Core
                         var destinationParameter = Expression.Parameter(typeof (TDestination));
                         var sourcePropertyType = property.PropertyType;
                         var destinationPropertyType = destinationProperty.PropertyType;
-                        Expression body = null; ///// TODO: Won't be needed when the rest of the if-then structure has been created
+                        Expression body;
                         var destinationPropertyExpression = Expression.Property(destinationParameter, destinationPropertyName);
                         if (sourcePropertyType != destinationPropertyType)
                         {
