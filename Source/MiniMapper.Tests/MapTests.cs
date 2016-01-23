@@ -128,5 +128,36 @@ namespace MiniMapper.Tests
                 sources[i].SameProperty.Should().Be(results[i].SameProperty);
             }
         }
+
+        [Test]
+        public void ANullObjectShouldMapToNull()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<SourceObject, DestinationObject>();
+            SourceObject source = null;
+
+            // Act
+            var result = Mapper.Map<SourceObject, DestinationObject>(source);
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void MapThrowsNullReferenceExceptionIfTheSourceObjectIsNullAndTheDestinationObjectIsProvided()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<SourceObject, DestinationObject>();
+            SourceObject source = null;
+            var destination = new DestinationObject();
+
+            // Act
+            Action action = () => Mapper.Map<SourceObject, DestinationObject>(source);
+
+            // Assert
+            action.ShouldNotThrow<NullReferenceException>();
+        }
     }
 }

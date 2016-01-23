@@ -93,6 +93,8 @@ namespace MiniMapper.Core
         /// <returns>The destination object with the fields mapped</returns>
         public static TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
+            if (source == null) throw new NullReferenceException();
+
             var map =
                 Maps.FirstOrDefault(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination));
 
@@ -133,7 +135,7 @@ namespace MiniMapper.Core
         /// <returns>The new destination object with the fields mapped</returns>
         public static TDestination Map<TSource, TDestination>(TSource source) where TDestination : class, new()
         {
-            return Map(source, new TDestination());
+            return source == null ? null : Map(source, new TDestination());
         }
 
         /// <summary>
