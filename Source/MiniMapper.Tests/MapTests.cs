@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using FluentAssertions;
 using MiniMapper.Core;
@@ -166,7 +167,7 @@ namespace MiniMapper.Tests
             // Arrange
             Mapper.ClearMappings();
             Mapper.CreateMap<StringObject, IntegerObject>();
-            var source = new StringObject {Integer = "5"};
+            var source = new StringObject { Integer = "5" };
 
             // Act
             var destination = Mapper.Map<StringObject, IntegerObject>(source);
@@ -181,11 +182,11 @@ namespace MiniMapper.Tests
             // Arrange
             Mapper.ClearMappings();
             Mapper.CreateMap<StringObject, LongObject>();
-            var source = new StringObject {Long = "5"};
+            var source = new StringObject { Long = "5" };
 
             // Act
             var destination = Mapper.Map<StringObject, LongObject>(source);
-            
+
             // Assert
             destination.Long.Should().Be(long.Parse(source.Long));
         }
@@ -196,7 +197,7 @@ namespace MiniMapper.Tests
             // Arrange
             Mapper.ClearMappings();
             Mapper.CreateMap<StringObject, DoubleObject>();
-            var source = new StringObject {Double = "5.5"};
+            var source = new StringObject { Double = "5.5" };
 
             // Act
             var destination = Mapper.Map<StringObject, DoubleObject>(source);
@@ -211,7 +212,7 @@ namespace MiniMapper.Tests
             // Arrange
             Mapper.ClearMappings();
             Mapper.CreateMap<StringObject, DecimalObject>();
-            var source = new StringObject {Decimal = "5.5"};
+            var source = new StringObject { Decimal = "5.5" };
 
             // Act
             var destination = Mapper.Map<StringObject, DecimalObject>(source);
@@ -226,7 +227,7 @@ namespace MiniMapper.Tests
             // Arrange
             Mapper.ClearMappings();
             Mapper.CreateMap<StringObject, DateTimeObject>();
-            var source = new StringObject {DateTime = "1/1/2016"};
+            var source = new StringObject { DateTime = "1/1/2016" };
 
             // Act
             var destination = Mapper.Map<StringObject, DateTimeObject>(source);
@@ -248,6 +249,96 @@ namespace MiniMapper.Tests
 
             // Assert
             destination.Boolean.Should().Be(bool.Parse(source.Boolean));
+        }
+
+        [Test]
+        public void MapConvertsIntegerPropertyToStringProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<IntegerObject, StringObject>();
+            var source = new IntegerObject { Integer = 5 };
+
+            // Act
+            var destination = Mapper.Map<IntegerObject, StringObject>(source);
+
+            // Assert
+            destination.Integer.Should().Be(source.Integer.ToString());
+        }
+
+        [Test]
+        public void MapConvertsLongPropertyToStringProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<LongObject, StringObject>();
+            var source = new LongObject { Long = 5 };
+
+            // Act
+            var destination = Mapper.Map<LongObject, StringObject>(source);
+
+            // Assert
+            destination.Long.Should().Be(source.Long.ToString());
+        }
+
+        [Test]
+        public void MapConvertsDoublePropertyToStringProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<DoubleObject, StringObject>();
+            var source = new DoubleObject { Double = 5.5 };
+
+            // Act
+            var destination = Mapper.Map<DoubleObject, StringObject>(source);
+
+            // Assert
+            destination.Double.Should().Be(source.Double.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void MapConvertsDecimalPropertyToStringProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<DecimalObject, StringObject>();
+            var source = new DecimalObject { Decimal = 5.5m };
+
+            // Act
+            var destination = Mapper.Map<DecimalObject, StringObject>(source);
+
+            // Assert
+            destination.Decimal.Should().Be(source.Decimal.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void MapConvertsDateTimePropertyToStringProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<DateTimeObject, StringObject>();
+            var source = new DateTimeObject { DateTime = DateTime.Parse("1/1/2016") };
+
+            // Act
+            var destination = Mapper.Map<DateTimeObject, StringObject>(source);
+
+            // Assert
+            DateTime.Parse(destination.DateTime).Should().Be(source.DateTime);
+        }
+
+        [Test]
+        public void MapConvertsBooleanPropertyToStringPropertyAsTrue()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<BooleanObject, StringObject>();
+            var source = new BooleanObject { Boolean = true };
+
+            // Act
+            var destination = Mapper.Map<BooleanObject, StringObject>(source);
+
+            // Assert
+            destination.Boolean.Should().Be(source.Boolean.ToString());
         }
     }
 }

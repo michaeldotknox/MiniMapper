@@ -59,18 +59,33 @@ namespace MiniMapper.Core
                         var destinationParameter = Expression.Parameter(typeof (TDestination));
                         var sourcePropertyType = property.PropertyType;
                         var destinationPropertyType = destinationProperty.PropertyType;
-                        Expression body;
+                        Expression body = null; ///// TODO: Won't be needed when the rest of the if-then structure has been created
                         var destinationPropertyExpression = Expression.Property(destinationParameter, destinationPropertyName);
                         if (sourcePropertyType != destinationPropertyType)
                         {
-                            var sourcePropertyExpression = Expression.Assign(destinationPropertyExpression,
-                                Expression.Convert(Expression.Call(typeof (Convert),
-                                    "ChangeType", null, Expression.Property(sourceParameter, property.Name),
-                                    Expression.Constant(destinationPropertyType)), destinationPropertyType));
-                            body =
-                                Expression.Convert(
-                                    Expression.Assign(destinationPropertyExpression, sourcePropertyExpression),
-                                    typeof(object));
+                            if (destinationPropertyType == typeof (string))
+                            {
+                                var y = Expression.Call(Expression.Property(sourceParameter, property.Name), "ToString",
+                                    null);
+                                var sourcePropertyExpression = Expression.Assign(destinationPropertyExpression,
+                                    Expression.Call(Expression.Property(sourceParameter, property.Name), "ToString",
+                                        null));
+                                body =
+                                    Expression.Convert(
+                                        Expression.Assign(destinationPropertyExpression, sourcePropertyExpression),
+                                        typeof(object));
+                            }
+                            else
+                            {
+                                var sourcePropertyExpression = Expression.Assign(destinationPropertyExpression,
+                                    Expression.Convert(Expression.Call(typeof (Convert),
+                                        "ChangeType", null, Expression.Property(sourceParameter, property.Name),
+                                        Expression.Constant(destinationPropertyType)), destinationPropertyType));
+                                body =
+                                    Expression.Convert(
+                                        Expression.Assign(destinationPropertyExpression, sourcePropertyExpression),
+                                        typeof(object));
+                            }
                         }
                         else
                         {
