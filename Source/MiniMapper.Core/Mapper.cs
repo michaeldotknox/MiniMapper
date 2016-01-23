@@ -179,6 +179,12 @@ namespace MiniMapper.Core
             return result;
         }
 
+        /// <summary>
+        /// Returns a list of mapped object and their properties for the specified source and destination types
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source object</typeparam>
+        /// <typeparam name="TDestination">The type of the destination object</typeparam>
+        /// <returns>The new destination object with the fields mapped</returns>
         public static IEnumerable<MappedObject> GetMappings<TSource, TDestination>()
         {
             return
