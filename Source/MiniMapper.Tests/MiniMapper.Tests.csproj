@@ -59,7 +59,10 @@
     <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClasses\DestinationObject.cs" />
+    <Compile Include="TestClasses\SecondDestinationObject.cs" />
+    <Compile Include="TestClasses\SecondSourceObject.cs" />
     <Compile Include="TestClasses\SourceObject.cs" />
+    <Compile Include="TestClasses\SourceObjectWithNonExistentDestinationProperty.cs" />
     <Compile Include="TestClasses\UnmappedDestinationObject.cs" />
   </ItemGroup>
   <ItemGroup>

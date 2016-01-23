@@ -34,6 +34,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DestinationPropertyNotFoundException.cs" />
     <Compile Include="Exceptions\MapNotFoundException.cs" />
     <Compile Include="Interrogation\Conversion.cs" />
     <Compile Include="Interrogation\MappedObject.cs" />

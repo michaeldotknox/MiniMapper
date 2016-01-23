@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using MiniMapper.Core;
+using MiniMapper.Core.Exceptions;
 using MiniMapper.Tests.TestClasses;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -22,33 +23,29 @@ namespace MiniMapper.Tests
         public void MapCreatesNewDestinationObject()
         {
             // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<SourceObject, DestinationObject>();
+            var source = _fixture.Create<SourceObject>();
 
             // Act
+            var destination = Mapper.Map<SourceObject, DestinationObject>(source);
 
             // Assert
-            throw new NotImplementedException();
+            destination.Should().NotBeNull();
         }
 
         [Test]
-        public void MapThrowsIfMapIsNotCreatedForSourceType()
+        public void MapThrowsMapNotFoundExceptionIfTheMappingDoesNotExistForTheObjectTypes()
         {
             // Arrange
+            Mapper.ClearMappings();
+            var source = _fixture.Create<SourceObject>();
 
             // Act
+            Action action = () => Mapper.Map<SourceObject, DestinationObject>(source);
 
             // Assert
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void MapThrowsIfMapIsNotCreatedForDestinationType()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-            throw new NotImplementedException();
+            action.ShouldThrow<MapNotFoundException<SourceObject, DestinationObject>>();
         }
 
         [Test]

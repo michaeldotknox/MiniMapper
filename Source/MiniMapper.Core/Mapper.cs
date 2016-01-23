@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using MiniMapper.Attributes;
+using MiniMapper.Core.Exceptions;
 using MiniMapper.Core.Interrogation;
 
 namespace MiniMapper.Core
@@ -27,30 +28,51 @@ namespace MiniMapper.Core
         /// <typeparam name="TDestination">The type of the destination object</typeparam>
         public static void CreateMap<TSource, TDestination>()
         {
-            var conversions = new List<Conversion>();
-            foreach (
-                var property in
-                    (typeof (TSource).GetProperties().Where(x => x.GetCustomAttribute(typeof (MapsToAttribute)) != null))
-                )
+            if (Maps.Any(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination)))
             {
-                var attribute = property.GetCustomAttribute<MapsToAttribute>();
-                if(attribute.DestinationType == null || attribute.DestinationType == typeof(TDestination))
-                {
-                    var sourceParameter = Expression.Parameter(typeof (TSource));
-                    var destinationParameter = Expression.Parameter(typeof (TDestination));
-                    var destinationProperty = attribute.DestinationName ?? property.Name;
-                    var body = Expression.Convert(Expression.Assign(
-                        Expression.PropertyOrField(destinationParameter, destinationProperty),
-                        Expression.PropertyOrField(sourceParameter, property.Name)), typeof(object));
-                    var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
-                    var conversionDelegate = (Func<TSource, TDestination, object>) expression.Compile();
+                return;
+            }
 
-                    conversions.Add(new Conversion
+            var conversions = new List<Conversion>();
+            foreach (var property in (typeof (TSource).GetProperties()))
+            {
+                // Get the mapsTo attribute for the property.  If the attribute does not exist, create one to use with the name of the property
+                var mapsToAttribute = property.GetCustomAttribute<MapsToAttribute>() ??
+                                      new MapsToAttribute(property.Name);
+
+                if(mapsToAttribute.DestinationType == null || mapsToAttribute.DestinationType == typeof(TDestination))
+
+                {
+                    var destinationPropertyName = mapsToAttribute.DestinationName ?? property.Name;
+                    var destinationProperty = typeof(TDestination).GetProperty(destinationPropertyName);
+                    if ((mapsToAttribute.DestinationType != null) && destinationProperty == null)
                     {
-                        SourceProperty = property.Name,
-                        DestinationProperty = destinationProperty,
-                        Expression = conversionDelegate
-                    });
+                        throw new DestinationPropertyNotFoundException(typeof(TSource), typeof(TDestination), destinationPropertyName)
+                        {
+                            Reason = $"Because the property named '{destinationPropertyName}' was not found on the destination type '{typeof(TDestination)}'."
+                        };
+                    }
+
+                    if(!(mapsToAttribute.DestinationType == null && destinationProperty == null))
+                    {
+                        var sourceParameter = Expression.Parameter(typeof (TSource));
+                        var destinationParameter = Expression.Parameter(typeof (TDestination));
+                        var body = Expression.Convert(Expression.Assign(
+                            Expression.PropertyOrField(destinationParameter, destinationPropertyName),
+                            Expression.PropertyOrField(sourceParameter, property.Name)), typeof(object));
+                        var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
+                        var conversionDelegate = (Func<TSource, TDestination, object>) expression.Compile();
+
+                        if(destinationProperty != null)
+                        {
+                            conversions.Add(new Conversion
+                            {
+                                SourceProperty = property.Name,
+                                DestinationProperty = destinationPropertyName,
+                                Expression = conversionDelegate
+                            });
+                        }
+                    }
                 }
             }
             Maps.Add(new Map
@@ -76,7 +98,7 @@ namespace MiniMapper.Core
 
             if (map == null)
             {
-                throw new Exception();
+                throw new MapNotFoundException<TSource, TDestination>();
             }
             var conversions = 
                 map.Conversions;
@@ -134,6 +156,34 @@ namespace MiniMapper.Core
             }
 
             return result;
+        }
+
+        public static IEnumerable<MappedObject> GetMappings<TSource, TDestination>()
+        {
+            return
+                GetMappings()
+                    .Where(
+                        x =>
+                            x.SourceObjectType == typeof (TSource).FullName &&
+                            x.DestinationObjectType == typeof (TDestination).FullName);
+        } 
+
+        /// <summary>
+        /// Removes all of the mappings
+        /// </summary>
+        public static void ClearMappings()
+        {
+            Maps.Clear();
+        }
+
+        /// <summary>
+        /// Removes all of the mappings for a specific source and destination type
+        /// </summary>
+        /// <typeparam name="TSource">The source type</typeparam>
+        /// <typeparam name="TDestination">The destination type</typeparam>
+        public static void ClearMappings<TSource, TDestination>()
+        {
+            Maps.RemoveAll(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination));
         }
     }
 }
