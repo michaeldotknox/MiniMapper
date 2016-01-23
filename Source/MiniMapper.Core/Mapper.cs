@@ -114,6 +114,13 @@ namespace MiniMapper.Core
             return destination;
         }
 
+        /// <summary>
+        /// Maps a list of source objects to a list of destination objects
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source object</typeparam>
+        /// <typeparam name="TDestination">The type of the destination object</typeparam>
+        /// <param name="source">An IEnumerable of source objects</param>
+        /// <returns>An IEnumerable of destination objects</returns>
         public static IEnumerable<TDestination> Map<TSource, TDestination>(IEnumerable<TSource> source)
             where TDestination : class, new()
         {
