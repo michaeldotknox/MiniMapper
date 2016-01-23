@@ -159,5 +159,95 @@ namespace MiniMapper.Tests
             // Assert
             action.ShouldNotThrow<NullReferenceException>();
         }
+
+        [Test]
+        public void MapConvertsStringPropertyToIntegerProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, IntegerObject>();
+            var source = new StringObject {Integer = "5"};
+
+            // Act
+            var destination = Mapper.Map<StringObject, IntegerObject>(source);
+
+            // Assert
+            destination.Integer.Should().Be(int.Parse(source.Integer));
+        }
+
+        [Test]
+        public void MapConvertsStringPropertyToLongProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, LongObject>();
+            var source = new StringObject {Long = "5"};
+
+            // Act
+            var destination = Mapper.Map<StringObject, LongObject>(source);
+            
+            // Assert
+            destination.Long.Should().Be(long.Parse(source.Long));
+        }
+
+        [Test]
+        public void MapConvertsStringPropertyToDoubleProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, DoubleObject>();
+            var source = new StringObject {Double = "5.5"};
+
+            // Act
+            var destination = Mapper.Map<StringObject, DoubleObject>(source);
+
+            // Assert
+            destination.Double.Should().Be(Double.Parse(source.Double));
+        }
+
+        [Test]
+        public void MapConvertsStringPropertyToDecimalProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, DecimalObject>();
+            var source = new StringObject {Decimal = "5.5"};
+
+            // Act
+            var destination = Mapper.Map<StringObject, DecimalObject>(source);
+
+            // Assert
+            destination.Decimal.Should().Be(decimal.Parse(source.Decimal));
+        }
+
+        [Test]
+        public void MapConvertsStringPropertyToDateTimeProperty()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, DateTimeObject>();
+            var source = new StringObject {DateTime = "1/1/2016"};
+
+            // Act
+            var destination = Mapper.Map<StringObject, DateTimeObject>(source);
+
+            // Assert
+            destination.DateTime.Should().Be(DateTime.Parse(source.DateTime));
+        }
+
+        [Test]
+        public void MapConvertsStringPropertyToBooleanPropertyAsTrue()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+            Mapper.CreateMap<StringObject, BooleanObject>();
+            var source = new StringObject { Boolean = "true" };
+
+            // Act
+            var destination = Mapper.Map<StringObject, BooleanObject>(source);
+
+            // Assert
+            destination.Boolean.Should().Be(bool.Parse(source.Boolean));
+        }
     }
 }

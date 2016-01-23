@@ -57,9 +57,29 @@ namespace MiniMapper.Core
                     {
                         var sourceParameter = Expression.Parameter(typeof (TSource));
                         var destinationParameter = Expression.Parameter(typeof (TDestination));
-                        var body = Expression.Convert(Expression.Assign(
-                            Expression.PropertyOrField(destinationParameter, destinationPropertyName),
-                            Expression.PropertyOrField(sourceParameter, property.Name)), typeof(object));
+                        var sourcePropertyType = property.PropertyType;
+                        var destinationPropertyType = destinationProperty.PropertyType;
+                        Expression body;
+                        var destinationPropertyExpression = Expression.Property(destinationParameter, destinationPropertyName);
+                        if (sourcePropertyType != destinationPropertyType)
+                        {
+                            var sourcePropertyExpression = Expression.Assign(destinationPropertyExpression,
+                                Expression.Convert(Expression.Call(typeof (Convert),
+                                    "ChangeType", null, Expression.Property(sourceParameter, property.Name),
+                                    Expression.Constant(destinationPropertyType)), destinationPropertyType));
+                            body =
+                                Expression.Convert(
+                                    Expression.Assign(destinationPropertyExpression, sourcePropertyExpression),
+                                    typeof(object));
+                        }
+                        else
+                        {
+                            var sourcePropertyExpression = Expression.Property(sourceParameter, property.Name);
+                            body =
+                                Expression.Convert(
+                                    Expression.Assign(destinationPropertyExpression, sourcePropertyExpression),
+                                    typeof(object));
+                        }
                         var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
                         var conversionDelegate = (Func<TSource, TDestination, object>) expression.Compile();
 

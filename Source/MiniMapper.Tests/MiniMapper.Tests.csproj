@@ -58,11 +58,18 @@
     <Compile Include="CreateMapTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClasses\BooleanObject.cs" />
+    <Compile Include="TestClasses\DateTimeObject.cs" />
+    <Compile Include="TestClasses\DecimalObject.cs" />
     <Compile Include="TestClasses\DestinationObject.cs" />
+    <Compile Include="TestClasses\DoubleObject.cs" />
+    <Compile Include="TestClasses\IntegerObject.cs" />
+    <Compile Include="TestClasses\LongObject.cs" />
     <Compile Include="TestClasses\SecondDestinationObject.cs" />
     <Compile Include="TestClasses\SecondSourceObject.cs" />
     <Compile Include="TestClasses\SourceObject.cs" />
     <Compile Include="TestClasses\SourceObjectWithNonExistentDestinationProperty.cs" />
+    <Compile Include="TestClasses\StringObject.cs" />
     <Compile Include="TestClasses\UnmappedDestinationObject.cs" />
   </ItemGroup>
   <ItemGroup>
