@@ -14,4 +14,8 @@
     <copyright>Copyright 2016</copyright>
     <tags>c# .Net Mapping</tags>
   </metadata>
+  <files>
+    <file src="bin\release\MiniMapper.Core.xml" />
+    <file src="bin\release\MiniMapper.Attributes.xml" />
+  </files>
 </package>
