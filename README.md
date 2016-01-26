@@ -7,7 +7,7 @@ A small framework for mapping the properties from one object to another
 ## What is MiniMapper?
 MiniMapper is a small framework for mapping the properties from one object to the properties of another object.  It is lightweight and is designed to be lightweight and as performant as possible.  As
 such, it does not have a large feature set.  Attributes are used to define the properties that are to be mapped and their destination properties.  This can be done in all mappings, or
-if you want, it can be done for a specific destination type, with each type having its own set of destination property names.
+if you want, it can be done for a specific destination type, with each type having its own set of destination property names.  New in version 1.1, MiniMapper will map properties with the same name without using attributes.
 
 ## When would you use MiniMapper?
 When I write APIs, I like to make data models that are tied closely to the database.  Typically, I name the properties in these data models the same as the fields in the database, or at least the same 
@@ -37,7 +37,7 @@ public class DestinationClass
 }
 ```
 
-You can also specify that a property maps to another property depending on the type.  For instance:
+You can also specify that a property maps to another property depending on the destination type.  For instance:
 
 ```
 public class SourceClass
@@ -97,6 +97,49 @@ var destination = Mapper.Map<SourceClass, DestinationClass>(source);
 ```
 
 In this case, MiniMapper will create the DestinationClass object for you.
+
+### Mapping a list of objects to another list of objects
+MiniMapper will now map a list of objects to a list of destination objects.  Any list or array will work.  Just define your classes as you normally would:
+
+```
+public class SourceClass
+{
+    [MapsTo("DestinationProperty")]
+    public string SourceProperty { get; set; }
+}
+
+public class DestinationClass
+{
+    public string DestinationProperty { get; set; }
+}
+```
+
+Then create the map:
+
+```
+using MiniMapper.Core;
+
+{
+    namespace MiniMapper.Example
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Mapper.CreateMap<SourceClass, DestinationClass);
+            }
+        }
+    }
+}
+```
+
+And, finally, map the source list to a destination list:
+
+```
+var sourceList = GetSourceList();
+
+var destinationList = Mapper.Map<SourceClass, DestinationClass>(sourceList);
+```
 
 ## Getting MiniMapper
 MiniMapper is available on NuGet as two packages:
