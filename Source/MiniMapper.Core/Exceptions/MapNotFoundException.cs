@@ -9,7 +9,7 @@ namespace MiniMapper.Core.Exceptions
     /// <typeparam name="TDestination">The type of the destination object</typeparam>
     public class MapNotFoundException<TSource, TDestination> : Exception
     {
-        internal MapNotFoundException() : base("A map was not found for a source of" + typeof(TSource) + " with a destination of " + typeof(TDestination))
+        internal MapNotFoundException() : base("A map was not found for a source of " + typeof(TSource) + " with a destination of " + typeof(TDestination))
         {
             
         }
