@@ -33,8 +33,19 @@ namespace MiniMapper.Core
                 return;
             }
 
+            var noAttributes = GetNoAttributes<TSource>();
+
             var conversions = new List<Conversion>();
-            foreach (var property in (typeof (TSource).GetProperties()))
+            PropertyInfo[] properties;
+            if (noAttributes)
+            {
+                properties = (typeof(TSource).GetProperties());
+            }
+            else
+            {
+                properties = (typeof(TSource).GetProperties()).Where(x => x.GetCustomAttribute<MapsToAttribute>() != null).ToArray();
+            }
+            foreach (var property in properties)
             {
                 // Get the mapsTo attribute for the property.  If the attribute does not exist, create one to use with the name of the property
                 var mapsToAttribute = property.GetCustomAttribute<MapsToAttribute>() ??
@@ -246,6 +257,17 @@ namespace MiniMapper.Core
         public static void ClearMappings<TSource, TDestination>()
         {
             Maps.RemoveAll(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination));
+        }
+
+        private static bool GetNoAttributes<TSource>()
+        {
+            var properties = typeof(TSource).GetProperties();
+            var noAttributes = true;
+            foreach (var property in properties.Select(attribute => attribute.GetCustomAttribute<MapsToAttribute>()).Where(property => property != null))
+            {
+                noAttributes = false;
+            }
+            return noAttributes;
         }
     }
 }

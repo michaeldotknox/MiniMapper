@@ -65,6 +65,8 @@
     <Compile Include="TestClasses\DoubleObject.cs" />
     <Compile Include="TestClasses\IntegerObject.cs" />
     <Compile Include="TestClasses\LongObject.cs" />
+    <Compile Include="TestClasses\MultiplePropertyDestination.cs" />
+    <Compile Include="TestClasses\MultiplePropertySource.cs" />
     <Compile Include="TestClasses\SecondDestinationObject.cs" />
     <Compile Include="TestClasses\SecondSourceObject.cs" />
     <Compile Include="TestClasses\SourceObject.cs" />

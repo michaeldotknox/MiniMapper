@@ -189,5 +189,19 @@ namespace MiniMapper.Tests
             var result = Mapper.GetMappings<SecondSourceObject, SecondDestinationObject>();
             result.Should().HaveCount(1);
         }
+
+        [Test]
+        public void CreateMapCreatesMapForPropertyWithAttributeWhenMatchingPropertiesExist()
+        {
+            // Arrange
+            Mapper.ClearMappings();
+
+            // Act
+            Mapper.CreateMap<MultiplePropertySource, MultiplePropertyDestination>();
+
+            // Assert
+            var result = Mapper.GetMappings().First();
+            result.Properties.Should().OnlyContain(x => x.SourceProperty == "Property1" && x.DestinationProperty == "Property2");
+        }
     }
 }
