@@ -76,8 +76,6 @@ namespace MiniMapper.Core
                         {
                             if (destinationPropertyType == typeof (string))
                             {
-                                var y = Expression.Call(Expression.Property(sourceParameter, property.Name), "ToString",
-                                    null);
                                 var sourcePropertyExpression = Expression.Assign(destinationPropertyExpression,
                                     Expression.Call(Expression.Property(sourceParameter, property.Name), "ToString",
                                         null));
