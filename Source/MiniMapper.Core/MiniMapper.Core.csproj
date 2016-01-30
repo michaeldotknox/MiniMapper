@@ -37,12 +37,14 @@
   <ItemGroup>
     <Compile Include="Exceptions\DestinationPropertyNotFoundException.cs" />
     <Compile Include="Exceptions\MapNotFoundException.cs" />
+    <Compile Include="IConversionFactory.cs" />
     <Compile Include="Interrogation\Conversion.cs" />
     <Compile Include="Interrogation\MappedObject.cs" />
     <Compile Include="Interrogation\MappedProperty.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleAttributeConversions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MiniMapper.Attributes\MiniMapper.Attributes.csproj">
