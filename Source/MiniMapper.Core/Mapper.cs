@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using MiniMapper.Attributes;
 using MiniMapper.Core.Exceptions;
 using MiniMapper.Core.Interrogation;
 
@@ -189,17 +186,6 @@ namespace MiniMapper.Core
         public static void ClearMappings<TSource, TDestination>()
         {
             Maps.RemoveAll(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination));
-        }
-
-        private static bool GetNoAttributes<TSource>()
-        {
-            var properties = typeof(TSource).GetProperties();
-            var noAttributes = true;
-            foreach (var property in properties.Select(attribute => attribute.GetCustomAttribute<MapsToAttribute>()).Where(property => property != null))
-            {
-                noAttributes = false;
-            }
-            return noAttributes;
         }
     }
 }
