@@ -36,7 +36,7 @@ namespace MiniMapper.Core
         /// </summary>
         /// <typeparam name="TSource">The type of the source object</typeparam>
         /// <typeparam name="TDestination">The type of the destination object</typeparam>
-        /// <param name="conversionFactory">A <see cref="IConversionFactory"/> object that will create an </param>
+        /// <param name="conversionFactory">A <see cref="IConversionFactory"/> object that will create a conversions for the properties on an object</param>
         public static void CreateMap<TSource, TDestination>(IConversionFactory conversionFactory)
         {
             if (Maps.Any(x => x.SourceType == typeof (TSource) && x.DestinationType == typeof (TDestination)))
@@ -50,6 +50,21 @@ namespace MiniMapper.Core
                 DestinationType = typeof (TDestination),
                 Conversions = conversionFactory.CreateConversions<TSource, TDestination>()
             });
+        }
+
+
+        /// <summary>
+        /// Creates a map to move the properties from one object to another
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source object</typeparam>
+        /// <typeparam name="TDestination">The type of the destination object</typeparam>
+        /// <param name="conversionFactories">An IEnumerable of <see cref="IConversionFactory"/> objects that will create conversions for the properties on an object</param>
+        public static void CreateMap<TSource, TDestination>(IEnumerable<IConversionFactory> conversionFactories)
+        {
+            foreach (var conversionFactory in conversionFactories)
+            {
+                CreateMap<TSource, TDestination>(conversionFactory);
+            }
         }
 
         /// <summary>
