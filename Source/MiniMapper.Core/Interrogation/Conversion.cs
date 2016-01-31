@@ -1,9 +1,10 @@
 ﻿namespace MiniMapper.Core.Interrogation
 {
+    // TODO: Add documentation
     public class Conversion
     {
-        internal string SourceProperty { get; set; }
-        internal string DestinationProperty { get; set; }
-        internal object Expression { get; set; }
+        public string SourceProperty { get; set; }
+        public string DestinationProperty { get; set; }
+        public object Expression { get; set; }
     }
 }

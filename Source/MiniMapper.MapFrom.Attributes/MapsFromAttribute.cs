@@ -9,14 +9,14 @@ namespace MiniMapper.MapFrom.Attributes
     public class MapsFromAttribute : Attribute
     {
         /// <summary>
-        /// The name of the property on the destination class
+        /// The name of the property on the source class
         /// </summary>
         public string SourceName { get; }
 
         /// <summary>
-        /// The destination type for the mapping
+        /// The source type for the mapping
         /// </summary>
-        public Type DestinationType { get; set; }
+        public Type SourceType { get; set; }
 
         /// <summary>
         /// Initializes the attribute on the property

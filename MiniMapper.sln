@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.MapFrom", "Sourc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.MapFrom.Attributes", "Source\MiniMapper.MapFrom.Attributes\MiniMapper.MapFrom.Attributes.csproj", "{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.MapFrom.Tests", "Source\MiniMapper.MapFrom.Tests\MiniMapper.MapFrom.Tests.csproj", "{2DAB5390-E21C-42C5-A2E8-D93E25723711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAB5390-E21C-42C5-A2E8-D93E25723711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAB5390-E21C-42C5-A2E8-D93E25723711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAB5390-E21C-42C5-A2E8-D93E25723711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAB5390-E21C-42C5-A2E8-D93E25723711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +60,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4ECDA44D-1945-4317-B4DB-D33968DDFFDF} = {415FA57F-6C73-4B0F-8429-715805AE96C4}
 		{984323DC-4A6D-4CB6-978F-BF61952F998B} = {415FA57F-6C73-4B0F-8429-715805AE96C4}
+		{2DAB5390-E21C-42C5-A2E8-D93E25723711} = {415FA57F-6C73-4B0F-8429-715805AE96C4}
 	EndGlobalSection
 EndGlobal

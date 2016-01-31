@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace MiniMapper.Tests
 {
+    // TODO: With the new interface, some of these tests can be lower level and should be in a different test class
     [TestFixture]
     public class CreateMapTests
     {
