@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.Tests", "Source\MiniMapper.Tests\MiniMapper.Tests.csproj", "{984323DC-4A6D-4CB6-978F-BF61952F998B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.MapFrom", "Source\MiniMapper.MapFrom\MiniMapper.MapFrom.csproj", "{02686E83-8F63-49EC-9370-38C43355B7BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMapper.MapFrom.Attributes", "Source\MiniMapper.MapFrom.Attributes\MiniMapper.MapFrom.Attributes.csproj", "{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{984323DC-4A6D-4CB6-978F-BF61952F998B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{984323DC-4A6D-4CB6-978F-BF61952F998B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{984323DC-4A6D-4CB6-978F-BF61952F998B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02686E83-8F63-49EC-9370-38C43355B7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02686E83-8F63-49EC-9370-38C43355B7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02686E83-8F63-49EC-9370-38C43355B7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02686E83-8F63-49EC-9370-38C43355B7BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDF7F0D-CBBE-44CB-BDB6-7C0A53174340}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
