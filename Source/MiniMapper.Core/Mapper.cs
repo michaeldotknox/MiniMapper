@@ -25,7 +25,7 @@ namespace MiniMapper.Core
         /// <typeparam name="TDestination">The type of the destination object</typeparam>
         public static void CreateMap<TSource, TDestination>()
         {
-            CreateMap<TSource, TDestination>(new SimpleAttributeConversions());
+            CreateMap<TSource, TDestination>(new MapsToAttributeConversion());
         }
 
         /// <summary>

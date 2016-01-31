@@ -9,7 +9,7 @@ using MiniMapper.Core.Interrogation;
 
 namespace MiniMapper.Core
 {
-    internal class SimpleAttributeConversions : IConversionFactory
+    internal class MapsToAttributeConversion : IConversionFactory
     {
         public IEnumerable<Conversion> CreateConversions<TSource, TDestination>()
         {
@@ -87,15 +87,12 @@ namespace MiniMapper.Core
                         var expression = Expression.Lambda(body, sourceParameter, destinationParameter);
                         var conversionDelegate = (Func<TSource, TDestination, object>)expression.Compile();
 
-                        if (destinationProperty != null)
+                        conversions.Add(new Conversion
                         {
-                            conversions.Add(new Conversion
-                            {
-                                SourceProperty = property.Name,
-                                DestinationProperty = destinationPropertyName,
-                                Expression = conversionDelegate
-                            });
-                        }
+                            SourceProperty = property.Name,
+                            DestinationProperty = destinationPropertyName,
+                            Expression = conversionDelegate
+                        });
                     }
                 }
             }
