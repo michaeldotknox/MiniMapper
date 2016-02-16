@@ -9,7 +9,10 @@ using MiniMapper.Core.Interrogation;
 
 namespace MiniMapper.Core
 {
-    internal class MapsToAttributeConversion : IConversionFactory
+    /// <summary>
+    /// Creates maps using the MapsTo attribute or using identical names of source and destination properties
+    /// </summary>
+    internal class MapsToConversion : IConversionFactory
     {
         public IEnumerable<Conversion> CreateConversions<TSource, TDestination>()
         {

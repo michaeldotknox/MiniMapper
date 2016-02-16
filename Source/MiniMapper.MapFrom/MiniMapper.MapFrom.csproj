@@ -34,6 +34,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CannotMapComplexObjectsException.cs" />
     <Compile Include="Exceptions\SourcePropertyNotFoundException.cs" />
     <Compile Include="MapsFromConversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
