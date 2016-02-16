@@ -35,6 +35,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CannotMapComplexObjectsException.cs" />
     <Compile Include="Exceptions\DestinationPropertyNotFoundException.cs" />
     <Compile Include="Exceptions\MapNotFoundException.cs" />
     <Compile Include="IConversionFactory.cs" />
