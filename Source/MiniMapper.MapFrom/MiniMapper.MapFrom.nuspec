@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MiniMapper.MapFrom</id>
+    <version>$version$</version>
+    <title>MiniMapper.MapFrom</title>
+    <authors>Michael Knox</authors>
+    <owners>Michael Knox</owners>
+    <projectUrl>https://github.com/michaeldotknox/minimapper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An add-on to MiniMapper that allows mapping from a type.</description>
+    <summary>MiniMapper is small framework for mapping the properties from one object to another.  MiniMapper.Core contains the components to create the maps and to map one object to another.</summary>
+    <releaseNotes>This is the first release of the MapFrom add-in for MiniMapper.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>c# .Net Mapping</tags>
+  </metadata>
+  <files>
+    <file src="bin\release\MiniMapper.MapFrom.xml" />
+    <file src="bin\release\MiniMapper.MapFrom.Attributes.xml" />
+  </files>
+</package>
