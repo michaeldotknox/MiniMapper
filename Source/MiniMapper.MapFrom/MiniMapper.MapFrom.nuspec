@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MiniMapper.MapFrom</id>
-    <version>$version$</version>
+    <version>1.0.0-rc1/version>
     <title>MiniMapper.MapFrom</title>
     <authors>Michael Knox</authors>
     <owners>Michael Knox</owners>
