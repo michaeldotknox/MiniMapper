@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MiniMapper.MapFrom.Exceptions
+namespace MiniMapper.Core.Exceptions
 {
     /// <summary>
     /// Indicates that the current object cannot be mapped because it contains complex objects

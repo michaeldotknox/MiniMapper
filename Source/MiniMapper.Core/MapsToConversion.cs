@@ -30,6 +30,10 @@ namespace MiniMapper.Core
             }
             foreach (var property in properties)
             {
+                if (!typeof(IComparable).IsAssignableFrom(property.PropertyType))
+                {
+                    throw new CannotMapComplexObjectsException();
+                }
                 // Get the mapsTo attribute for the property.  If the attribute does not exist, create one to use with the name of the property
                 var mapsToAttribute = property.GetCustomAttribute<MapsToAttribute>() ??
                                       new MapsToAttribute(property.Name);
