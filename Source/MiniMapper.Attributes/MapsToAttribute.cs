@@ -26,5 +26,25 @@ namespace MiniMapper.Attributes
         {
             DestinationName = destinationName;
         }
+
+        /// <summary>
+        /// Initializes the attribute on the property
+        /// </summary>
+        /// <param name="destinationName">The name of the property on the destination class</param>
+        /// <param name="destinationType">The destination type for the mapping</param>
+        public MapsToAttribute(string destinationName, Type destinationType)
+        {
+            DestinationName = destinationName;
+            DestinationType = destinationType;
+        }
+
+        /// <summary>
+        /// Initializes the attribute on the property
+        /// </summary>
+        /// <param name="destinationType">The destination type for the mapping</param>
+        public MapsToAttribute(Type destinationType)
+        {
+            DestinationType = destinationType;
+        }
     }
 }
